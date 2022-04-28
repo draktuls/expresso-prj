@@ -1,0 +1,21 @@
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY NOT NULL,
+    name TEXT NOT NULL,
+    password TEXT NOT NULL,
+    admin TINYINT NOT NULL
+);
+INSERT INTO users(name,password,admin) VALUES('admin','$2b$10$cAvZWrb1yB5hqdz9c3ABw.5NloUWO4kU2eBJqj608zZPq5mdXysp.',1);
+INSERT INTO users(name,password,admin) VALUES('honzman','$2b$10$zfADvdifp4xYLR6.SVTN1etD93KV3SEpeBGBJqoPQJ7KLrWEwYiuq',0);
+
+CREATE TABLE notes (
+    id INTEGER PRIMARY KEY NOT NULL,
+    user_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    content TEXT NOT NULL,
+    date UNSIGNED BIG INT NOT NULL
+);
+
+INSERT INTO notes(user_id,name,content,date) VALUES(1,'CV','Make cv for xxxxx, dont screw it like the last time! This time -> prepare for the basic interview question. Make the boss like you -> or no job remember.',(SELECT datetime(CURRENT_TIMESTAMP, 'localtime')));
+INSERT INTO notes(user_id,name,content,date) VALUES(1,'Passwords','Facebook:IamTheBestSysAdmin123 - Instagram:SysAdminSuperman233333 - Expresso:BestExpressorEver -> doesnt work yet, need to change it!!!!!',(SELECT datetime(CURRENT_TIMESTAMP, 'localtime')));
+
+INSERT INTO notes(user_id,name,content,date) VALUES(2,'Secrets','I need to remember my girlfriend birthday its 29.2 !!! cannot screw it this time... need to think about all the consequences of my actions... also her password is unbreakable -> heslo123',(SELECT datetime(CURRENT_TIMESTAMP, 'localtime')));

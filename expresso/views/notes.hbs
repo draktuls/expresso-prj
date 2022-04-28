@@ -1,0 +1,31 @@
+{{{navbar_val}}}
+<script>
+    var notenew = function(){
+        location.href="/notes/new";
+    }
+    var noteget = function(id){
+        location.href="/notes/"+id;
+    }
+</script>
+<div class="container py-4 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <p class="text-white-50 mb-3"><strong>Express yourself and catch your emotions using this amazing Expressor</strong></p>
+        <div class="pb-4">
+            <button onclick="notenew()" class="btn btn-outline-light btn-lg px-5">Create a new note</button>
+        </div>
+    </div>
+    <div class="card bg-dark text-white border-white" style="border-width:1px;border-radius: 2rem;">
+        <dl class="row px-5 pt-4">
+            <dt class="col-sm-5 pb-5">
+                    <button class="btn btn-outline-light btn-sm btn_name">Name of the note</button>
+                </dt>
+            <dd class="col-sm-7 pb-5 pl-5">Content of the note</dd>
+            {{#each notes_list}}
+                <dt class="col-sm-5 pb-2">
+                    <button onclick="noteget({{this.id}})" class="btn btn-outline-light btn-sm btn_name">{{this.name}}</button>
+                </dt>
+                <dd class="col-sm-7 pb-2 pl-5">{{this.content}}</dd>
+            {{/each}}
+        </dl>
+    </div>
+</div>

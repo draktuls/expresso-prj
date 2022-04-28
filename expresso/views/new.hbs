@@ -1,0 +1,61 @@
+{{{navbar_val}}}
+<script>
+  var notecancel = function(){
+    location.href='/notes';
+  }
+  var notecreate = function(){
+    var notename = document.getElementById("namen");
+    var notecont = document.getElementById("content");
+    const box = document.getElementById("msg_box");
+    const alert_box = document.getElementById("alert_box");
+    var msg={};
+    if(notename === undefined || notecont === undefined){
+      alert_box.className = "alert alert-danger";
+      box.innerText = "The name and content errored out";
+    }else{
+      fetch("/notes", {
+        method: 'POST',
+        body: JSON.stringify({
+          name: notename.value,
+          content: notecont.value
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }).then((response) => response.json()).then((json) => {
+        if(json.type==="good"){
+            alert_box.className = "alert alert-success";
+        }else{
+            alert_box.className = "alert alert-danger";
+        }
+        box.innerText = json.message;
+        if(json.type==="good"){
+          var id = json.message.split("id ")[1];
+          location.href="/notes/"+id;
+        }
+      }); 
+    }
+  }
+</script>
+<div class="container py-4 h-100">
+  <div class="bg-dark text-white border-white border px-5 py-5" style="border-width:1px;border-radius: 2rem;">
+    <div class="form-outline form-white mb-4">
+        <label class="form-label" for="namen">Name</label>
+        <input type="text" id="namen" name="notename" placeholder="Hello world" class="form-control form-control-lg bg-dark text-white" />
+    </div>
+    <div class="form-outline form-white mb-4">
+        <label class="form-label" for="content">Content</label>
+        <textarea type="text" style="width: 100%; height:150px;" id="content" name="content" placeholder="My first note is here!" class="form-control form-control-lg bg-dark text-white"></textarea>
+    </div>
+    <div class="pb-3">
+      <button class="btn btn-outline-light btn-lg px-5" onclick="notecancel()">Back</button>
+      <button class="btn btn-outline-light btn-lg px-5" onclick="notecreate()">Save</button>
+    </div>
+    <div id="alert_box" class="d-none">
+        <strong>
+            <div id="msg_box">
+            </div>
+        </strong>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<section>
+  <div class="container py-2 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white border-white" style="border-width:2px;border-radius: 5rem;">
+          <div class="card-body p-5 text-center">
+            <div class="mb-md-2">
+                <div class="mb-4 border border-white bg-white" style="display:inline-block;width:200px;border-radius: 20rem;">
+                    <img class="img-fluid" style="max-width:100%;max-height:100%;" src="/images/expresso.png">
+                </div>
+                
+                <form action="/auth/login" method="post">
+                    <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
+                    <p class="text-white-50 mb-5">Please enter your login and password!</p>
+
+                    <div class="form-outline form-white mb-4">
+                        <input type="text" id="username_form" name="username" placeholder="Username" class="form-control form-control-lg bg-dark text-white" />
+                        <label class="form-label" for="username_form">Username</label>
+                    </div>
+
+                    <div class="form-outline form-white mb-2">
+                        <input type="password" id="password_form" name="password" placeholder="Password" class="form-control form-control-lg bg-dark text-white" />
+                        <label class="form-label" for="password_form">Password</label>
+                    </div>
+
+                    <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Forgot password?</a></p>
+                    <div class="pb-4">
+                        <input type="submit" value="Login" class="btn btn-outline-light btn-lg px-5">
+                    </div>
+                </form>
+                <div id="alert_box" class="d-none">
+                    <strong>
+                        <div id="msg_box">
+                        </div>
+                    </strong>
+                </div>
+
+                <div>
+                    <p class="mb-2">Don't have an account? <a href="/register" class="text-white-50 fw-bold">Sign Up</a>
+                    </p>
+                </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+    const query = window.location.search;
+    const box = document.getElementById("msg_box");
+    const alert_box = document.getElementById("alert_box");
+    if(query!==null || query!==undefined){
+        try{
+        var params = query.split("?")[1].split("&");
+        const msg_type = params[1].split("=");
+        const msg_var = params[0].split("=");
+        if(msg_type[0]==="type" || msg_var[0]==="message"){
+            if(msg_type[1]==="good"){
+                alert_box.className = "alert alert-success";
+            }else{
+                alert_box.className = "alert alert-danger";
+            }
+            box.innerText = decodeURI(msg_var[1]);
+        }
+        }catch{
+            
+        }
+    }
+</script>
