@@ -3,8 +3,7 @@ Very simple note express app. Some admin functionalities addedd for extra spicyn
 ## Running
 Have a docker installed and run build script. The application will be available on the port *8000*
 
-If you are not comfortable using docker you could do it manually
-You need sqlite3 and npm
+If you are not comfortable using docker you could do it manually. You need sqlite3 and npm installed.
 
 ```bash
 cd expresso
